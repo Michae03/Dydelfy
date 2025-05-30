@@ -1,0 +1,43 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Width="300"
+        Height="300"
+        x:Class="Dydelfy.Settings"
+        Title="Settings">
+    <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="30">
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="30">
+        <StackPanel>
+            <StackPanel Spacing="10" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Label>plansza</Label>
+                <StackPanel Orientation="Horizontal" Spacing="5">
+                    <Label>x</Label>
+                    <TextBox Name="x_value_box"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Spacing="5">
+                    <Label>y</Label>
+                    <TextBox Name="y_value_box"></TextBox>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel>
+            <Label>dydelfy</Label>
+            <TextBox Name="dydelfy_box"></TextBox>
+            <Label>krokodyle</Label>
+            <TextBox Name="krokodyle_box"></TextBox>
+            <Label>szopy</Label>
+            <TextBox Name="szopy_box"></TextBox>
+        </StackPanel>
+    </StackPanel>
+        <StackPanel Orientation="Horizontal" Spacing="10">
+            <Label>czas</Label>
+            <TextBox Name="time_box"></TextBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Spacing="10" HorizontalAlignment="Center">
+            <Button Click="Confirm_OnClick">Zatwierdź</Button>
+        </StackPanel>
+    </StackPanel>
+    
+</Window>

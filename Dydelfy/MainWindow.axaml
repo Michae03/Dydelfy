@@ -1,0 +1,16 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Height="200"
+        Width="150"
+        x:Class="Dydelfy.MainWindow"
+        Title="Dydelfy">
+   <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="5">
+       <Label>GDZIE JEST DYDELF</Label>
+       <Button VerticalAlignment="Center" HorizontalAlignment="Center" Click="Start_On_Click">Start</Button>
+       <Button VerticalAlignment="Center" HorizontalAlignment="Center" Click="Settings_On_Click">Ustawienia</Button>
+       <Button VerticalAlignment="Center" HorizontalAlignment="Center">Koniec</Button>
+   </StackPanel>
+</Window>
