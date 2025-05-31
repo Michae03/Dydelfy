@@ -18,12 +18,12 @@ public partial class Settings : Window
     public Settings()
     {
         InitializeComponent();
-        board.X = 3;
-        board.Y = 3;
-        krokodyle = 0;
-        szopy = 3;
-        dydelfy = 1;
-        time = 10;
+        board.X = 10;
+        board.Y = 10;
+        krokodyle = 1;
+        szopy = 8;
+        dydelfy =6;
+        time = 60;
     }
 
     private void Confirm_OnClick(object? sender, RoutedEventArgs e)

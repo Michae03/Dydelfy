@@ -16,6 +16,7 @@ public partial class GameWindow : Window
     private DispatcherTimer timer;
     private int gameTime;
     private DispatcherTimer crocTimer;
+    private bool crocRevealed;
     public GameWindow()
     {
         InitializeComponent();
@@ -28,6 +29,7 @@ public partial class GameWindow : Window
         elements = randomisedElements();
         d_found = 0;
         CreateBoard(settings.board.X, settings.board.Y);
+        crocRevealed = false;
         gameTime = settings.time;
         TimeLabel.Content = gameTime.ToString();
         initTimer();
@@ -53,8 +55,8 @@ public partial class GameWindow : Window
     {
         int doom = 2;
         crocTimer = new DispatcherTimer();
-        timer.Interval = TimeSpan.FromSeconds(1);
-        timer.Tick += (sender, e) =>
+        crocTimer.Interval = TimeSpan.FromSeconds(1);
+        crocTimer.Tick += (sender, e) =>
         {
             doom--;
             if (doom == 0)
@@ -138,6 +140,19 @@ public partial class GameWindow : Window
         return animals;
     }
 
+    private Button? GetButtonAt(int row, int column)
+    {
+        foreach (var child in Plansza.Children)
+        {
+            if (child is Button btn &&
+                Grid.GetRow(btn) == row &&
+                Grid.GetColumn(btn) == column)
+            {
+                return btn;
+            }
+        }
+        return null;
+    }
     private void On_Click_Trashcan(object? sender, RoutedEventArgs e)
     {
         if (sender is Button trashcan)
@@ -147,8 +162,19 @@ public partial class GameWindow : Window
             switch (animal)
             {
                 case "k":
-                    trashcan.Content = "🐊";
-                    beginCrocTimer();
+                    if (!crocRevealed)
+                    {
+                        trashcan.Content = "🐊";
+                        crocRevealed = true;
+                        beginCrocTimer();
+                    }
+                    else
+                    {
+                        trashcan.Content = "\ud83d\uddd1";
+                        crocTimer.Stop();
+                        crocRevealed = false;
+                    }
+                    
                     
                     break;
                 case "d":
@@ -166,6 +192,45 @@ public partial class GameWindow : Window
                     break;
                 case "s":
                     trashcan.Content = "🦝"; 
+                    DispatcherTimer szoptimer = new DispatcherTimer();
+                    int szopTime = 2;
+                    szoptimer.Interval = TimeSpan.FromSeconds(1);
+                    szoptimer.Tick += (sender, e) =>
+                    {
+                        szopTime--;
+                        if (szopTime == 0)
+                        {
+                            int x = Grid.GetRow(trashcan);
+                            int y = Grid.GetColumn(trashcan);
+                            szoptimer.Stop();
+                            trashcan.Content = "\ud83d\uddd1";
+                            if (x > 0)
+                            {
+                                GetButtonAt(x-1, y).Content = "\ud83d\uddd1";
+                                GetButtonAt(x-1, y).IsEnabled = true;
+                            }
+
+                            if (y > 0)
+                            {
+                                GetButtonAt(x, y - 1).Content = "\ud83d\uddd1";
+                                GetButtonAt(x, y - 1).IsEnabled = true;
+                            }
+
+                            if (y < settings.board.Y)
+                            {
+                                GetButtonAt(x, y + 1).Content = "\ud83d\uddd1";
+                                GetButtonAt(x, y + 1).IsEnabled = true;
+                            }
+
+                            if (x < settings.board.X)
+                            {
+                                GetButtonAt(x + 1, y).Content = "\ud83d\uddd1";
+                                GetButtonAt(x + 1, y).IsEnabled = true;
+                            }
+                            
+                        }
+                    };
+                    szoptimer.Start();
                     break;
                 case "p":
                     trashcan.Content = "";
